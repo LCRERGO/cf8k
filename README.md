@@ -25,3 +25,8 @@ newsreader you want to run just like:
 ```bash
 NEWS=globo make run
 ```
+
+To see documentation for exported parts of the code type:
+```bash
+make doc
+```

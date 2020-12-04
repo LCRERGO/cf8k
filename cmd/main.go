@@ -1,7 +1,5 @@
 package main
 
-// This is a test documentation
-
 import (
 	"log"
 	"time"
@@ -18,6 +16,6 @@ func main() {
 	}
 	outputFunc := ChooseOutputFunc(*outFile, *formatType)
 	doc := GetDocument(news.GetUrl())
-	found := news.Parser(doc)
+	found := news.ParseTitles(doc)
 	outputFunc(found)
 }

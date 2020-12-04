@@ -7,6 +7,10 @@ import (
 	"os"
 )
 
+/* An auxiliary function that chooses the way the records will be outputed
+   fname: file name
+   format: the output format file
+*/
 func ChooseOutputFunc(fname string, format string) (outFunc func([][]string)) {
 	switch format {
 	case "stdout":
@@ -21,13 +25,14 @@ func ChooseOutputFunc(fname string, format string) (outFunc func([][]string)) {
 	return outFunc
 }
 
+// A function that prints to stdout
 func PrintNewsFound(newsFound [][]string) {
-	fmt.Println("link, title")
 	for _, rec := range newsFound {
 		fmt.Println(rec)
 	}
 }
 
+// A builder for csv output
 func buildWriteToCsv(fname string) func([][]string) {
 	return func(newsFound [][]string) {
 		file, err := os.OpenFile(fname, os.O_CREATE|os.O_WRONLY, 0664)

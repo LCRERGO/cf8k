@@ -7,6 +7,9 @@ cf8k: ${SRC_DIR}/*.go
 run: ${SRC_DIR}/*.go
 	go run $^ -news ${NEWS}
 
+doc: ${SRC_DIR}
+	go doc -all $^
+
 clean:
 	go clean
 	rm -rf ${BUILD_DIR}

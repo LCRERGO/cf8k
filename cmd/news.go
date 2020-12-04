@@ -4,8 +4,6 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-// This is a struct made to aggregate the url and the parser function for a
-// given news web site
 type HackerNews struct {
 	url string
 }
@@ -14,9 +12,10 @@ type Globo struct {
 	url string
 }
 
+// Defines how a news web site should behave
 type News interface {
 	GetUrl() string
-	Parser(doc *goquery.Document) [][]string
+	ParseTitles(doc *goquery.Document) [][]string
 }
 
 // A list of currently supported news web sites
@@ -25,15 +24,18 @@ var NewsList = map[string]News{
 	"hackernews": &HackerNews{"https://news.ycombinator.com/"},
 }
 
+// Gets url from Globo
 func (g *Globo) GetUrl() string {
 	return g.url
 }
 
+// Gets url from HackerNews struct
 func (hk *HackerNews) GetUrl() string {
 	return hk.url
 }
 
-func (g *Globo) Parser(doc *goquery.Document) (newsFound [][]string) {
+// Parses titles from globo
+func (g *Globo) ParseTitles(doc *goquery.Document) (newsFound [][]string) {
 	newsFound = append(newsFound, []string{"link", "title"})
 
 	// Find main links
@@ -52,7 +54,8 @@ func (g *Globo) Parser(doc *goquery.Document) (newsFound [][]string) {
 	return newsFound
 }
 
-func (hk *HackerNews) Parser(doc *goquery.Document) (newsFound [][]string) {
+// Parses titles from hackernews
+func (hk *HackerNews) ParseTitles(doc *goquery.Document) (newsFound [][]string) {
 	newsFound = append(newsFound, []string{"link", "title"})
 
 	doc.Find(".storylink").Each(func(_ int, s *goquery.Selection) {
