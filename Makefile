@@ -4,10 +4,10 @@ BUILD_DIR = build
 cf8k: ${SRC_DIR}/main.go
 	go build -o ${BUILD_DIR}/$@ -i $^ 
 
-run: ${SRC_DIR}/*
+run: ${SRC_DIR}/*.go
 	go run $^ -news ${NEWS}
 
-test: ${SRC_DIR}/*
+test: ${SRC_DIR}/*.go
 	go test $^
 
 clean:
